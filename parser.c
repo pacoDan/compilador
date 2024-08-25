@@ -1,20 +1,20 @@
 #include "parser.h"
-typedef struct
-{
-    char identifi[TAMLEX];
-    TOKEN t;
-    /* t=0, 1, 2, 3 Palabra Reservada, t=ID=4 Identificador */
-} RegTS;
-RegTS TS[1000] = {{"inicio", INICIO}, {"fin", FIN}, {"leer", LEER}, {"escribir", ESCRIBIR}, {"$", 99}};
-typedef struct
-{
-    TOKEN clase;
-    char nombre[TAMLEX];
-    int valor;
-} REG_EXPRESION;
-char buffer[TAMLEX];
-TOKEN tokenActual;
-int flagToken = 0;
+// typedef struct
+// {
+//     char identifi[TAMLEX];
+//     TOKEN t;
+//     /* t=0, 1, 2, 3 Palabra Reservada, t=ID=4 Identificador */
+// } RegTS;
+// RegTS TS[1000] = {{"inicio", INICIO}, {"fin", FIN}, {"leer", LEER}, {"escribir", ESCRIBIR}, {"$", 99}};
+// typedef struct
+// {
+//     TOKEN clase;
+//     char nombre[TAMLEX];
+//     int valor;
+// } REG_EXPRESION;
+// char buffer[TAMLEX];
+// TOKEN tokenActual;
+// int flagToken = 0;
 
 // ------------------
 // Aproximacion a C
