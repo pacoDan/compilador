@@ -1,5 +1,4 @@
 #include "parser.h"
-#include "scanner.h"
 /**********Procedimientos de Analisis Sintactico (PAS) *****************/
 void Objetivo(void)
 {
