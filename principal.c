@@ -1,5 +1,6 @@
 // #include "scanner.h"
-#include "parser.h"
+// #include "parser.h"
+#include "analizadorSintactico.h"
 /***************************Programa Principal************************/
 int main(int argc, char *argv[])
 {

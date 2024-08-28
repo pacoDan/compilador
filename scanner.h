@@ -60,3 +60,7 @@ char buffer[TAMLEX];
 TOKEN tokenActual;
 
 int flagToken = 0;
+
+TOKEN scanner();
+int estadoFinal(int);
+int columna(int);

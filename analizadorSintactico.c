@@ -1,5 +1,6 @@
-#include "parser.h"
-#include "scanner.h"
+// #include "parser.h"
+// #include "scanner.h"
+#include "analizadorSintactico.h"
 /**********************Rutinas Semanticas******************************/
 
 REG_EXPRESION ProcesarCte(void)

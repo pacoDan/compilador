@@ -1,6 +1,6 @@
+// #include "parser.h"
 #include "scanner.h"
-#include "parser.h"
-
+#include "analizadorSintactico.h"
 /**************************Scanner************************************/
 
 TOKEN scanner()
