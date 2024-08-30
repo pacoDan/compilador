@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -std=c11
 
 # Archivos fuente
 SRCS = principal.c scanner.c parser.c
-EXEC = principal
+EXEC = ejecutable
 
 # Regla por defecto para compilar el programa
 all: $(EXEC)
@@ -22,3 +22,6 @@ ejemplo2: $(EXEC)
 # Limpiar archivos compilados
 clean:
 	rm -f $(EXEC)
+
+principal2:
+	gcc -o $(EXEC) principal2.c
