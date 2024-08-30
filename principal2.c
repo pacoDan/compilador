@@ -79,7 +79,6 @@ void Chequear(char *s);
 void Comenzar(void);
 void Terminar(void);
 void Asignar(REG_EXPRESION izq, REG_EXPRESION der);
-
 /***************************Programa Principal************************/
 
 int main(int argc, char *argv[])
@@ -87,6 +86,15 @@ int main(int argc, char *argv[])
     TOKEN tok;
     char nomArchi[TAMNOM];
     int l;
+
+    strcpy(nomArchi,argv[1]);
+    printf("PATH DE ARCHIVO INGRESADO ES: %s\n", argv[1]);
+    printf("PATH DE ARCHIVO INGRESADO ES: %s\n", nomArchi);
+    if ((in = fopen(nomArchi, "r")) == NULL)
+    {
+        printf("No se pudo abrir archivo fuente: %s\n", nomArchi);
+        return -1;
+    }
 
     /***************************Se abre el Archivo Fuente******************/
     if (argc == 1)
