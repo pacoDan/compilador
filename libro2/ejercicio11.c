@@ -8,7 +8,7 @@ int *estadosFinales; // posible lista de ints, podria usar array
 int mientrasHayaCaracteres(char);
 void inicializoLaPila();
 char *cadena; // cadena a analizar
-int estadoTopeDeLaPila(int estadoActual, char topeDePila, char *caracterActual);
+int estadoTopeDeLaPila(int estadoActual, char topeDePila, char caracterActual);
 void resultados();
 char *contenidoDePila();
 char *_contenidoDePila;
@@ -81,9 +81,9 @@ void inicializoLaPila()
      strcpy(_contenidoDePila,"$"); 
      printf("inicializoLaPila()=> _contenidoDePila:\"%s\" \n",_contenidoDePila);
 }
-int estadoTopeDeLaPila(int estadoActual, char topeDePila, char *caracterActual)
+int estadoTopeDeLaPila(int estadoActual, char topeDePila, char caracterActual)
 {
-    puts("estadoTopeDeLaPila()");
+    printf("estadoTopeDeLaPila(estadoActual:%d,topeDePila:%c,caracterActual:%c)\n",estadoActual,topeDePila,caracterActual);
     EstadoSimbolo registro = TM[fila(estadoActual,topeDePila)][columna(caracterActual)];
     if(strcmp("e",registro.simbolo)) pop();
     if(strcmp("$",registro.simbolo));
@@ -110,7 +110,7 @@ int fila(int estado, char simbolo) {
     return -1; // Retorna -1 si no se encuentra la coincidencia
 }
 int columna(char c){
-    printf("columna()=> caracterActual:%s",c);
+    printf("columna()=> caracterActual:%s\n",c);
     if(c='a' || strcmp(c,"a")) return 0;
     if(c='b' || strcmp(c,"b")) return 1;
     if(c='\0') return 2;
