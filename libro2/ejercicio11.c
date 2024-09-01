@@ -60,11 +60,12 @@ void resultados()
     if (criterioEstadoFinal() || criterioPilaVacia())
         printf("se Reconoce la Cadena %s \n", cadena);
     else
+        perror("NO SE RECONOCE LA CADENA!!----");
         mostrarPilaYEstadoActual();
 }
 void mostrarPilaYEstadoActual()
 {
-    fprintf(stderr,"NO SE RECONOCE LA CADENA %s\n",cadena);
+    // fprintf(stderr,"NO SE RECONOCE LA CADENA %s\n",cadena);
     fprintf(stderr, "la pila tiene contenido: %s\n", contenidoDePila());
     fprintf(stderr, "el estado actual es -> %d\n", estadoActual);
     fprintf(stderr,"estado de rechazo es %d\n",ESTADORECHAZO);    
@@ -76,7 +77,9 @@ int mientrasHayaCaracteres(char c)
 void inicializoLaPila()
 {
     // _contenidoDePila = strdup("$");
-     _contenidoDePila = (char*)malloc(2 * sizeof(char)); 
+     _contenidoDePila = (char*)malloc(2 * sizeof(char));
+     strcpy(_contenidoDePila,"$"); 
+     printf("inicializoLaPila()=> _contenidoDePila:\"%s\" \n",_contenidoDePila);
 }
 int estadoTopeDeLaPila(int estadoActual, char topeDePila, char *caracterActual)
 {
@@ -91,6 +94,7 @@ int estadoTopeDeLaPila(int estadoActual, char topeDePila, char *caracterActual)
 }
 // Función para encontrar la posición en el vector _fila
 int fila(int estado, char simbolo) {
+    printf("fila()=> estado: %d, simbolo: %s\n",estadoActual,simbolo);
     // for (int i = 0; i < sizeof(_fila) / sizeof(_fila[0]); ++i) {
     //     if (_fila[i].estado == estado && strcmp(_fila[i].simbolo, simbolo) == 0) {
     //         return i; // Retorna la posición si se encuentra la coincidencia
@@ -106,9 +110,11 @@ int fila(int estado, char simbolo) {
     return -1; // Retorna -1 si no se encuentra la coincidencia
 }
 int columna(char c){
+    printf("columna()=> caracterActual:%s",c);
     if(c='a' || strcmp(c,"a")) return 0;
     if(c='b' || strcmp(c,"b")) return 1;
     if(c='\0') return 2;
+    else perror("columna()");
 }
 char * contenidoDePila(){
     return _contenidoDePila;
@@ -124,6 +130,8 @@ int criterioPilaVacia(){
 }
 // Función para hacer push
 void push() {
+    printf("push(): ");
+    mostrarPilaYEstadoActual();
     int len = strlen(_contenidoDePila);
     _contenidoDePila = (char*)realloc(_contenidoDePila, (len + 2) * sizeof(char)); // +2 porque sumamos "R" y el terminador null
     _contenidoDePila[len] = 'R';
@@ -132,6 +140,8 @@ void push() {
 
 // Función para hacer pop
 void pop() {
+    printf("pop(): ");
+    mostrarPilaYEstadoActual();
     int len = strlen(_contenidoDePila);
     if (len > 1) { // Si hay más de "$", se puede hacer pop
         _contenidoDePila[len - 1] = '\0';
