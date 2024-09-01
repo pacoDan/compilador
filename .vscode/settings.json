@@ -1,9 +1,0 @@
-{
-    "files.associations": {
-        ".fantomasignore": "ignore",
-        "parser.h": "c",
-        "scanner.h": "c",
-        "stdio.h": "c",
-        "string.h": "c"
-    }
-}
