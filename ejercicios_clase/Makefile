@@ -16,5 +16,9 @@ detecta_decimales:
 detecta_entero:
 	flex detecta_enteros.l
 	$(CC) lex.yy.c -o $(EXEC)
+detecta_palabras_reservadas:
+	flex detecta_palabras_reservadas.l
+	$(CC) lex.yy.c -o $(EXEC)
+
 ejecutar:
 	./$(EXEC)
