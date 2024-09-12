@@ -51,3 +51,12 @@ z  := y+x12;
 fin
 ```
 := en realidad es el operador asignacion
+
+
+
+
+PREGUNTAS:
+- por que se usan las bibliotecas, que traen cada una de ellas
+- en la tabla de simbolos, por que esos elementos , que significa el $ y 99
+-  ver las funciones de PAS, separar con las funciones complementarias/auxiliares
+- el proposito del programa es ejecutar la funcion objetivo
