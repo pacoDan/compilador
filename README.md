@@ -1,7 +1,7 @@
 
 Gramática Léxica
 <token> -> uno de <identificador> <constante> <palabraReservada>
-                    <operadorAditivo> <asignación> <carácterPuntuación>
+                    <operadorAditivo> <asignacion> <carácterPuntuación>
 <identificador> -> <letra> {<letra o dígito>}
 <constante> -> <dígito> {dígito>}
 <letra o dígito> -> uno de <letra> <dígito>

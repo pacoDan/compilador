@@ -17,15 +17,12 @@ generar_ejecutable:
 	flex $(gramatica_lexica)
 	$(CC) y.tab.c lex.yy.c -o $(EXEC)
 
-# Regla por defecto para compilar el programa
-all: $(EXEC)
-
-$(EXEC): $(SRCS)
-	$(CC) $(CFLAGS) -o $@ $(SRCS)
-
 # Reglas para ejecutar el programa con diferentes archivos de entrada
 ejemplo1: $(EXEC)
 	./$(EXEC) ejemplo1.micro
 
 ejemplo2: $(EXEC)
 	./$(EXEC) ejemplo2.micro
+
+ejecutar:
+	./$(EXEC)

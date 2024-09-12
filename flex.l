@@ -10,11 +10,11 @@ IDENTIFICADOR {LETRA}({LETRA}|{DIGITO})*
 constEntera {DIGITO}({DIGITO})*
 %%
 EOF {return FDT;}
-"inicio" {return INICIO;}
-"fin" {return FIN;}
-"leer" {return LEER;}
-"escribir" {return ESCRIBIR;}
-":=" {return ASIGNACION;}
+"inicio" {puts("se ingreso token palabraReservada INICIO");return INICIO;}
+"fin" {puts("se ingreso token palabraReservada FIN");return FIN;}
+"leer" {puts("se ingreso token palabraReservada  LEER");return LEER;}
+"escribir" {puts("se ingreso token palabraReservada  ESCRIBIR");return ESCRIBIR;}
+":=" {puts("se ingreso token ASIGNACION");return ASIGNACION;}
 {constEntera} {yylval.num=atoi(yytext);return CONSTANTE;}
 ";" {return PYCOMA;}
 "," {return COMA;}
