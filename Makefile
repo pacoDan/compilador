@@ -9,6 +9,9 @@ gramatica_lexica=flex.l
 SRCS = parser.c
 EXEC = ejecutable
 
+# Objetivo por defecto: Generar el ejecutable y ejecutar
+all: generar_ejecutable ejecutar
+
 # Limpiar archivos compilados
 clean:
 	rm -f $(EXEC) y.tab.c lex.yy.c y.tab.h

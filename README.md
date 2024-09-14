@@ -1,4 +1,9 @@
-
+```sh
+    make #compila, genera el ejecutable y corre el ejecutable 
+```
+```sh
+    make clean #elimina ejecutables y archivos "intermedios" 
+```
 Gramática Léxica
 <token> -> uno de <identificador> <constante> <palabraReservada>
                     <operadorAditivo> <asignacion> <carácterPuntuación>
