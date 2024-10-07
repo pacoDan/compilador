@@ -4,7 +4,7 @@
 #include <ctype.h>
 
 #define NUMESTADOS 15
-#define NUMCOLS 13
+#define NUMCOLS 14
 #define TAMLEX 32 + 1
 #define TAMNOM 20 + 1
 /******************Declaraciones Globales*************************/
@@ -24,6 +24,7 @@ typedef enum
     ASIGNACION,
     SUMA,
     RESTA,
+    MULTIPLICACION,
     FDT,
     ERRORLEXICO
 } TOKEN;
@@ -59,6 +60,7 @@ void ListaExpresiones(void);
 void Expresion(REG_EXPRESION *presul);
 void Primaria(REG_EXPRESION *presul);
 void OperadorAditivo(char *presul);
+void OperadorMultiplicativo(char *presul);
 
 REG_EXPRESION ProcesarCte(void);
 REG_EXPRESION ProcesarId(void);
@@ -495,6 +497,36 @@ void Terminar(void)
 
     Generar("Detiene", "", "", "");
 }
+void Termino(REG_EXPRESION *presul)
+{
+    /* <termino> -> <primaria> { <operadorMultiplicativo> <primaria> #gen_infijo } */
+    REG_EXPRESION operandoIzq, operandoDer;
+    char op[TAMLEX];
+    TOKEN t;
+
+    Primaria(&operandoIzq);
+
+    for (t = ProximoToken(); t == MULTIPLICACION; t = ProximoToken())
+    {
+        OperadorMultiplicativo(op);
+        Primaria(&operandoDer);
+        operandoIzq = GenInfijo(operandoIzq, op, operandoDer);
+    }
+    *presul = operandoIzq;
+}
+void OperadorMultiplicativo(char *presul)
+{
+    /* <operadorMultiplicativo> -> MULTIPLICACION #procesar_op | DIVISION #procesar_op */
+    TOKEN t = ProximoToken();
+
+    if (t == MULTIPLICACION)
+    {
+        Match(t);
+        strcpy(presul, ProcesarOp());
+    }
+    else
+        ErrorSintactico();
+}
 
 void Asignar(REG_EXPRESION izq, REG_EXPRESION der)
 {
@@ -507,21 +539,23 @@ void Asignar(REG_EXPRESION izq, REG_EXPRESION der)
 
 TOKEN scanner()
 {
-    int tabla[NUMESTADOS][NUMCOLS] = {{1, 3, 5, 6, 7, 8, 9, 10, 11, 14, 13, 0, 14},
-                                      {1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
-                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14},
-                                      {4, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
-                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14},
-                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14},
-                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14},
-                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14},
-                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14},
-                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14},
-                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14},
-                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 12, 14, 14, 14},
-                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14},
-                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14},
-                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14}};
+    int tabla[NUMESTADOS][NUMCOLS] = {{1, 3, 5, 6, 7, 8, 9, 10, 11, 14, 13, 0, 14, 15}, // Nueva columna para *
+                                      {1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2},
+                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14},
+                                      {4, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4},
+                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14},
+                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14},
+                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14},
+                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14},
+                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14},
+                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14},
+                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14},
+                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 12, 14, 14, 14, 14},
+                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14},
+                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14},
+                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14},
+                                      {14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14, 14}}; // Estado 15 para *
+
     int car;
     int col;
     int estado = 0;
@@ -575,6 +609,8 @@ TOKEN scanner()
         return ASIGNACION;
     case 13:
         return FDT;
+    case 15:
+        return MULTIPLICACION;
     case 14:
         return ERRORLEXICO;
     }
@@ -612,6 +648,9 @@ int columna(int c)
         return 10;
     if (isspace(c))
         return 11;
+    if (c == '*')  // Operador de multiplicación
+        return 13; // Nueva columna para *
     return 12;
 }
+
 /*************Fin Scanner**********************************************/

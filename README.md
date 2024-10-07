@@ -9,15 +9,16 @@ Gramática Léxica
 <token> -> uno de <identificador> <constante> <palabraReservada>
                     <operadorAditivo> <operadorMultiplicativo> <asignacion> <carácterPuntuación>
 <identificador> -> <letra> {<letra o dígito>}
-<constante> -> <dígito> {dígito>}
+<constante> -> <dígito> {<dígito>}
 <letra o dígito> -> uno de <letra> <dígito>
 <letra> -> una de a-z A-Z
 <dígito> -> uno de 0-9
 <palabraReservada> -> una de inicio fin leer escribir
 <operadorAditivo> -> uno de + -
-<operadorMultiplicativo> -> *
+<operadorMultiplicativo> -> uno de *
 <asignación> -> :=
 <carácterPuntuación> -> uno de ( ) , ;
+
 ```
 observaciones:
 - el conjunto de NO terminales son los tokens (excepto el primer no terminal)
@@ -32,9 +33,10 @@ Gramática Sintáctica
 <sentencia> -> <identificador> := <expresión> ; |
                 leer ( <listaIdentificadores> ) ; |
                 escribir ( <listaExpresiones> ) ;
-<listaIdentificadores> -> <identficador> {, <identficador>}
+<listaIdentificadores> -> <identificador> {, <identificador>}
 <listaExpresiones> -> <expresión> {, <expresión>}
-<expresión> -> <primaria> {<operadorAditivo> <primaria>}
+<expresión> -> <termino> {<operadorAditivo> <termino>}
+<termino> -> <primaria> {<operadorMultiplicativo> <primaria>}
 <primaria> -> <identificador> | <constante> |
                 ( <expresión> )
 ```
