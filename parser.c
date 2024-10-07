@@ -24,6 +24,7 @@ typedef enum
     ASIGNACION,
     SUMA,
     RESTA,
+    MULTIPLICACION,
     FDT,
     ERRORLEXICO
 } TOKEN;
@@ -130,7 +131,6 @@ int main(int argc, char *argv[])
 void Objetivo(void)
 {
     /* <objetivo> -> <programa> FDT #terminar */
-
     Programa();
     Match(FDT);
     Terminar();
@@ -219,6 +219,7 @@ void Identificador(REG_EXPRESION *presul)
     *presul = ProcesarId(); // rutina semantica
 }
 
+// procesa una o mas expresiones dentro de una sentencia de escritura, dentro de escribir()
 void ListaExpresiones(void)
 {
     /* <listaExpresiones> -> <expresion> #escribir_exp {COMA <expresion> #escribir_exp} */
@@ -234,6 +235,7 @@ void ListaExpresiones(void)
     }
 }
 
+// conecta los operadores, luego con GenInfijo genra las operaciones infijas
 void Expresion(REG_EXPRESION *presul)
 {
     /* <expresion> -> <primaria> { <operadorAditivo> <primaria> #gen_infijo } */
@@ -441,6 +443,7 @@ void Chequear(char *s)
 void Comenzar(void)
 {
     /* Inicializaciones Semanticas */
+    puts("Accion semantica comenzar");
 }
 
 void Terminar(void)

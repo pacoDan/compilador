@@ -5,8 +5,9 @@
     make clean #elimina ejecutables y archivos "intermedios" 
 ```
 Gramática Léxica
+```
 <token> -> uno de <identificador> <constante> <palabraReservada>
-                    <operadorAditivo> <asignacion> <carácterPuntuación>
+                    <operadorAditivo> <operadorMultiplicativo> <asignacion> <carácterPuntuación>
 <identificador> -> <letra> {<letra o dígito>}
 <constante> -> <dígito> {dígito>}
 <letra o dígito> -> uno de <letra> <dígito>
@@ -14,9 +15,10 @@ Gramática Léxica
 <dígito> -> uno de 0-9
 <palabraReservada> -> una de inicio fin leer escribir
 <operadorAditivo> -> uno de + -
+<operadorMultiplicativo> -> *
 <asignación> -> :=
 <carácterPuntuación> -> uno de ( ) , ;
-
+```
 observaciones:
 - el conjunto de NO terminales son los tokens (excepto el primer no terminal)
 - el conjunto de terminales son los caracteres que se pueden leer en el lenguaje
@@ -24,6 +26,7 @@ observaciones:
 - si un programa fuente de Micro tiene un caracter que no es terminal, entonces no sera reconocido por el lenguaje generado por esta gramatica
 
 Gramática Sintáctica
+```
 <programa> -> inicio <listaSentencias> fin
 <listaSentencias> -> <sentencia> {<sentencia>}
 <sentencia> -> <identificador> := <expresión> ; |
@@ -34,7 +37,7 @@ Gramática Sintáctica
 <expresión> -> <primaria> {<operadorAditivo> <primaria>}
 <primaria> -> <identificador> | <constante> |
                 ( <expresión> )
-
+```
 
 observaciones: 
 - conjunto NO terminales, son los programas que se usarian en el main y como rutina principales para  reconocer el lenguaje Micro en un archivo fuente de Micro
