@@ -29,3 +29,7 @@ ejemplo2: $(EXEC)
 
 ejecutar:
 	./$(EXEC)
+
+ejecutarEjemplo3:
+	gcc -o ejecutable parser.c
+	./ejecutable ejemplo3.m

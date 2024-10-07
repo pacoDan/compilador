@@ -251,6 +251,21 @@ void Expresion(REG_EXPRESION *presul)
     }
     *presul = operandoIzq;
 }
+// void Expresion(REG_EXPRESION *presul)
+// {
+//     /* <expresion> -> <primaria> { <operadorAditivo> <primaria> #gen_infijo } */
+//     REG_EXPRESION operandoIzq, operandoDer;
+//     char op[TAMLEX];
+//     TOKEN t;
+//     Primaria(&operandoIzq);
+//     while ((t = ProximoToken()) == SUMA || t == RESTA)
+//     {
+//         OperadorAditivo(op);
+//         Primaria(&operandoDer);
+//         operandoIzq = GenInfijo(operandoIzq, op, operandoDer);
+//     }
+//     *presul = operandoIzq;
+// }
 
 void Primaria(REG_EXPRESION *presul)
 {
@@ -336,10 +351,10 @@ REG_EXPRESION GenInfijo(REG_EXPRESION e1, char *op, REG_EXPRESION e2)
     char cadNum[TAMLEX];
     char cadOp[TAMLEX];
     if (op[0] == '-')
-        strcpy(cadOp, "Restar");
+        strcpy(cadOp, "Resta");
     if (op[0] == '+')
-        strcpy(cadOp, "Sumar");
-    sprintf(cadNum, "%d", numTemp);
+        strcpy(cadOp, "Suma");
+    // sprintf(cadNum, "%s%d", numTemp);
     numTemp++;
     strcat(cadTemp, cadNum);
     if (e1.clase == ID)
