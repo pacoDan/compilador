@@ -5,6 +5,7 @@
 extern char *yytext;
 extern int yyleng;
 extern int yylex(void);
+extern FILE* yyin;
 extern void yyerror(char*);
 void asignarIds(char* nombre, int valor);
 int obtenerValorId(char* nombre);
@@ -93,8 +94,18 @@ primaria: ID
 
 %%
 
-int main() {
+/*int main() {
     yyparse();
+}*/
+
+void main(int argc,char **argv)
+{
+if (argc>1)
+ yyin=fopen(argv[1],"rt");
+else
+ yyin=stdin;
+yyparse();
+
 }
 
 void yyerror (char *s){

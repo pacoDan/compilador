@@ -1,0 +1,4 @@
+bison -yd bison.y 
+flex flex.l
+gcc y.tab.c lex.yy.c -o ejecutable
+ejecutable

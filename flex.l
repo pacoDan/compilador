@@ -20,8 +20,8 @@ EOF {return FDT;}
 "," {return COMA;}
 "(" {return PARENIZQUIERDO;}
 ")" {return PARENDERECHO;}
-"+" {return SUMA;}
-"-" {return RESTA;}
-"*" {return MULTIPLICACION;}
+"+" {puts("se ingreso token palabraReservada SUMA");return SUMA;}
+"-" {puts("se ingreso token palabraReservada RESTA");return RESTA;}
+"*" {puts("se ingreso token palabraReservada MULTIPLICACION");return MULTIPLICACION;}
 {IDENTIFICADOR} {yylval.cadena = strdup(yytext); return ID;}
 %%
